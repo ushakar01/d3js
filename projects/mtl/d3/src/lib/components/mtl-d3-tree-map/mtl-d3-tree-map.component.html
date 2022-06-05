@@ -1,0 +1,121 @@
+<ng-container>
+  <div class="row">
+    <div class="col-md-12">
+      <div #popover style="visibility: hidden" container="body" ngbPopover="">
+        <div class="popover mw-350px" id="treepopover">
+          <div class="popover-body mw-350px" *ngIf="config.isTooltip">
+            <ng-container *ngIf="tooltipproperties?.length > 0">
+              <table class="table table-sm table-borderless mb-0 tooltip-table mw-300px">
+                <tbody class="text-left">
+                  <tr *ngFor="let item of tooltipproperties">
+                    <td><strong>{{ item.name }}:</strong></td>
+                    <td class="text-wrap">{{ item?.value?.toString() | titlecase }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <!-- <ng-template #elseTemplate>
+              <table class="table table-sm table-borderless mb-0 tooltip-table">
+                <tbody>
+                  <tr class="text-center">
+                    <td><b>No data</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-template> -->
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="loading" class="container container-heirarchy">
+        <mtl-d3-loader></mtl-d3-loader>
+      </div>
+
+      <div [id]="id" #tree class="container container-heirarchy px-0" [ngClass]="{
+            'container--is-fullscreen': isfullscreen,
+            container: !loading,
+            topology: !loading,
+            'topology-loading': loading
+          }">
+        <div class="position-absolute topo-details" cdkDragBoundary=".container-heirarchy" cdkDrag #details
+          *ngIf="(detailsProperties | json) != '{}' && config?.isFixedTooltip">
+          <!-- <mtl-icon prefix="icon" icon="close" height="14px" width="14px" class="position-absolute"
+            *ngIf="(detailsProperties | json) != '{}' && config?.isFixedTooltip"></mtl-icon> -->
+
+          <div class="card-body p-0 topo-details">
+            <div class="d-flex flex-row p-2">
+              <a class="topocircleBadge topocirclebadge--small">
+                <!-- <mtl-icon [icon]="selectedItem?.type ? selectedItem?.type : 'undefined'" [prefix]="'icon'"
+                  (click)="close()"></mtl-icon> -->
+              </a>
+              <div class="d-flex flex-column justify-content-center ml-2">
+                <div>
+                  <p placement="bottom" class="titleControl font-medium-1" (click)="copyClipboard(selectedItem?.name)">
+                    {{selectedItem?.name}}
+                    <!-- <mtl-icon prefix="icon" class="mtl-sm" icon="copy" height="14px" width="14px"></mtl-icon> -->
+                  </p>
+                </div>
+                <div class="text-muted" *ngIf="selectedItem?.children && selectedItem?.children?.length">
+                  <span class="nodebadge px-1" ngbTooltip="Connected Child nodes"
+                    container="body">{{selectedItem?.children?.length}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-2"> Status :{{selectedItem?.health ? selectedItem.health : '-'}}</div>
+            <ng-container *ngFor="let item of detailsProperties | keyvalue; let i=index">
+              <ngb-accordion #acc="ngbAccordion" activeIds="topodetails-0" [closeOthers]="true">
+                <ngb-panel title="{{item?.key | titlecase}}" [id]="'topodetails-'+i">
+                  <ng-template ngbPanelHeader>
+                    <button class="accordion-button justify-content-between p-2" ngbPanelToggle>
+                      <p class="m-0"> {{item?.key | titlecase}}</p>
+                    </button>
+                  </ng-template>
+                  <ng-template ngbPanelContent class="accordion-content">
+                    <div *ngFor="let val of item.value" class="detailsvalue">
+                      <a class="text-bold-600 text-muted font-small-1 mb-1"
+                        (click)="copyClipboard(val?.value)">{{val?.name}}
+                        <div (click)="copyClipboard(val?.value)" id="copyIcon" ngbTooltip="Copy {{val?.name}}"
+                          container="body">
+                          <!-- <mtl-icon prefix="icon" class="mtl-sm" icon="copy" height="14px" width="14px"></mtl-icon> -->
+                        </div>
+                      </a>
+                      <div class="">
+                        <p class="font-small-2 text-bold-600 mb-1">{{val?.value}}</p>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            </ng-container>
+          </div>
+        </div>
+        <div class="toolbar--top-right" *ngIf="!loading"
+          [ngClass]="isfullscreen ? 'toolbar--top-expand-icon' : 'toolbar--top-collapse-icon'">
+          <button class="btn round mr-1 mb-1 mr-1 shadow-sm bg-white d-flex tree-toolbar-icon" (click)="fullscreen()"
+            [ngbTooltip]="!isfullscreen ? 'Expand' : 'Collapse'" placement="bottom" *ngIf="isExpandable">
+            <img class="m-auto" [src]="sanitizeIcon(isfullscreen ? icons.minimize :icons.maximize)" alt="star"
+              width="16" height="16">
+          </button>
+          <button class="btn round mr-1 mb-1 mr-1 shadow-sm bg-white d-flex tree-toolbar-icon" (click)="reload()"
+            ngbTooltip="Reload" placement="bottom">
+            <img class="m-auto" [src]="sanitizeIcon(icons.refresh)" alt="star" width="16" height="16">
+          </button>
+        </div>
+        <div class="toolbar--bottom" *ngIf="isZoomOptions&&!loading">
+          <button class="btn round mr-1 mb-1 mr-1 shadow-sm bg-white d-flex tree-toolbar-icon" (click)="zoomIn()"
+            [disabled]="config.scaleExtent[1] == scale">
+            <img class="m-auto" [src]="sanitizeIcon(icons.zoomIn)" alt="star" width="16" height="16">
+          </button>
+          <button class="btn round mr-1 mb-1 mr-1 shadow-sm bg-white d-flex tree-toolbar-icon" (click)="resetZoom()">
+            <img class="m-auto" [src]="sanitizeIcon(icons.reset)" alt="star" width="16" height="16">
+          </button>
+          <button class="btn round mr-1 mb-1 mr-1 shadow-sm bg-white d-flex tree-toolbar-icon" (click)="zoomOut()"
+            [disabled]="config.scaleExtent[0] == scale">
+            <img class="m-auto" [src]="sanitizeIcon(icons.zoomOut)" alt="star" width="16" height="16">
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ng-container>

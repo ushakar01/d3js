@@ -1,0 +1,42 @@
+// CONFIG
+export const DEFAULT_TREE_SVG_CLASS = 'd3-hierarchy';
+export const DEFAULT_TREE_WIDTH = 800;
+export const DEFAULT_TREE_HEIGHT = 500;
+export const DEFAULT_TREE_NDDE_SIZE = [60, 160];
+export const DEFAULT_TREE_NODE_DISTANCE = 200;
+export const DEFAULT_ASSESSMENT_TREE_NODE_DISTANCE = 300;
+export const DEFAULT_TREE_SCALE_STEP = 0.25;
+export const DEFAULT_TREE_SCALE_EXTENT = [0.5, 2];
+export const DEFAULT_TREE_CHILDREN_KEY = 'children';
+export const DEFAULT_TREE_KIDS_KEY = 'kids';
+export const DEFAULT_TREE_ITEM_ID = 'itemId';
+export const DEFAULT_TREE_SEARCH_QUERY_KEY = 'name';
+export const DEFAULT_TREE_ON_NODE_CLICK = () => null;
+export const DEFAULT_TREE_FORMAT_LABEL_TEXT = node => node.data.name.length > 10 ? node.data.name.substring(0, 10) + '...' : node.data.name;
+export const DEFAULT_TREE_ON_SELECTION_CLEAR = () => null;
+export const DEFAULT_TREE_LEAF_DASH_ARRAY_SIZE = '10,5';
+export const DEFAULT_TREE_PAGE_SIZE = 2;
+export const IMAGEPATH = 'assets/svgicons/';
+export const EXPAND = 'assets/svgicons/Expand.svg';
+export const COLLAPSE = 'assets/svgicons/Collapse.svg';
+export const FORWARDARROW = false;
+export const BACKWARDARROW = false;
+export const DEFAULT_DETAILS_POPUP = false;
+export const DEFAULT_TREE_ISARROWHEAD = true;
+export const DEFAULT_IS_INTENTED = false;
+// MISC
+export const DEFAULT_TREE_TRANSITION_DURATION = 150;
+export const DEFAULT_IS_SHOW_OPERATIONS = false;
+export const DEFAULT_IS_SHOW_REQUIRED_ACTION = false;
+export const DEFAULT_IS_TOOLTIP = true;
+export const DEFAULT_IS_FIXED_DETAILS = false;
+
+export const ROOT_COLOR = '#74B6F7';
+export const NODE_COLOR = '#74B6F7';
+export const LEAF_COLOR = '#226cc5';
+export const LINK_COLOR = '#b2bec3';
+export const SELECTED_COLOR = '#2291ff';
+export const HOVER_COLOR = '#2291ff';
+export const DANGER_COLOR = '#CC0000';
+export const AMBER_COLOR = '#F2853B';
+export const SUCCESS_COLOR = '#72B52B';

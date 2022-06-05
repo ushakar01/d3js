@@ -1,0 +1,236 @@
+mtl-d3-forcedirected {
+
+  .tooltip-table th, .tooltip-table td {
+    padding-top: 0 !important;
+  }
+  text {
+    font-family: 'LatoBold';
+    font-size: 13px;
+  }
+
+  .btn.disabled,
+  .btn:disabled,
+  fieldset:disabled .btn {
+    pointer-events: none;
+    opacity: .35 !important;
+  }
+
+  #force-popover.popover {
+    max-width: fit-content !important;
+    min-width: 280px;
+    background-color: #fff !important;
+    opacity: 1 !important;
+  }
+
+  .container {
+    position: relative;
+    min-height: calc((var(--vh, 1vh) * 100) - 7.9rem);
+    max-width: calc(100vw - 40px);
+    /* box-shadow: inset 0 0 107px -79px rgb(0 0 0 / 75%); */
+    /* background-color: #fff; */
+    border-radius: 0;
+    overflow: hidden;
+    cursor: grab;
+  }
+  .forcecontainer--is-fullscreen {
+    position: fixed;
+    border-radius: 0px;
+    top: 40px;
+    width: calc(100vw - 62px);
+    height: calc(100vh - 41px);
+    left: 61px;
+    background-color: white;
+
+    .toolbar--top-left-visible {
+      // min-height: 798px;
+      height: calc(100vh - 42px);
+      z-index: 1000;
+      .leftside-nav {
+        height: calc(100vh - 240px);
+        overflow-y: auto;
+        // min-height: 600px;
+      }
+    }
+
+    .toolbar--top-right {
+      top: 3rem;
+    }
+  }
+
+  .container-heirarchy{
+    margin: 10px 0;
+    z-index: 10;
+  }
+
+  .d3-forcedirected {
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+  }
+
+
+  .toolbar,
+  .toolbar--top-left-hidden,
+  .toolbar--top-right,
+  .toolbar--bottom {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+
+  .toolbar--top-left-hidden {
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s linear .6s, opacity 300ms;
+    // -webkit-transform: translate(-100%,0);transform: translate(-100%,0);
+  }
+
+  .link {
+    cursor: default;
+
+    // line {
+    //   stroke: #aaa;
+    // }
+
+    .outline {
+      cursor: default;
+    }
+
+    .overlay {
+      cursor: default;
+      fill: #6ac6ff;
+      -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+      filter: alpha(opacity=0);
+      opacity: 0;
+    }
+
+    text {
+      cursor: default;
+    }
+  }
+
+
+  .link.highlight{
+    line {
+      stroke: #2a75d7 !important;
+    }
+  }
+
+  .node .ring {
+    fill: none;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    stroke: #6ac6ff;
+    stroke-width: 8px;
+  }
+
+  .relationship.selected .overlay,
+  .relationship:hover .overlay {
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=30)';
+    filter: alpha(opacity=30);
+    opacity: .3;
+  }
+
+  .toolbar--top-left-visible {
+    // position: absolute;
+    // z-index: 2;
+    display: flex;
+    flex-direction: column;
+    top: 0px;
+    left: 0px;
+    min-width: 9px;
+    background-color: #f7f7f7;
+    height: 100%;
+    border-radius: 25px 0 0 25px;
+    opacity: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+    box-shadow: inset -7px 0 4px -7px #00000047;
+  }
+
+  .toolbar--top-right {
+    flex-direction: column;
+    right: 32px;
+  }
+
+  .toolbar--top-expand-icon {
+    top: auto;
+  }
+
+  .toolbar--top-collapse-icon {
+    top: 32px;
+  }
+
+  .toolbar--bottom {
+    flex-direction: column;
+    bottom: 32px;
+    right: 32px;
+  }
+  .minimap--bottom{
+    position: absolute;
+    z-index: 2;
+    bottom: 32px;
+    right: 64px;
+  }
+  .leftside-nav {
+    height: 510px;
+    overflow-y: auto;
+  }
+
+  .toolbarIcon {
+    margin-bottom: 10px;
+  }
+
+  .toolbarIcon:last-child {
+    margin-bottom: 0;
+  }
+
+  .node-icon-image{
+    filter: drop-shadow(0px 0px 8px 3px rgba(117,117,117,0.75));
+  }
+}
+
+.forced-svg-legends{
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+
+.svg-legend-text{
+  font-size: 16px;
+}
+
+.z-index-1{
+  z-index: 1;
+}
+
+.tooltip-table{
+  td{
+    min-width: 125px !important;
+    max-width: 150px !important;
+    word-break: break-all !important;
+  }
+}
+.mw-350px{
+  max-width: 350px !important;
+}

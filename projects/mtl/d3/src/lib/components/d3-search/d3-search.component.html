@@ -1,0 +1,11 @@
+<div class="d-flex searchBorder" [class.searchActive]="isInputShown">
+    <div class="m-auto d-flex align-items-center">
+        <input [placeholder]="title+' ...'" #input class="form-control ml-0" [class.hidden]="!isInputShown"
+            (blur)="hideInput()" (input)="onInput(input.value)" [(ngModel)]="searchKey" />
+        <a class="d-inline-block" ngbTooltip="Search" container="body" (click)="showInput()">
+            <!-- <mtl-icon prefix="icon" icon="search" [width]="isInputShown ? '14' : '18' "
+                [height]="isInputShown ? '14' : '18' " [ngClass]="{ active: input.value.length > 0 }">
+            </mtl-icon> -->
+        </a>
+    </div>
+</div>

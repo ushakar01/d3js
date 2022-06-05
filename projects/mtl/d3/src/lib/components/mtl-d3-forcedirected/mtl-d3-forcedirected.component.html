@@ -1,0 +1,67 @@
+<div class="row" [id]="graphid">
+    <div class="col-md-12">
+        <div #forcedirectedpopover style="visibility: hidden">
+            <div class="popover mw-350px" id="force-popover">
+                <div class="popover-body mw-350px">
+                    <ng-container *ngIf="tooltipproperties?.length > 0; else elseTemplate">
+                        <table class="table table-sm table-borderless mb-0 tooltip-table">
+                            <tbody class="text-left">
+                                <tr *ngFor="let item of tooltipproperties">
+                                    <th>{{ item.name }}:</th>
+                                    <td class="text-wrap">{{ item.value }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <table class="table table-sm table-borderless mb-0">
+                            <tbody class="text-left">
+                                <tr>
+                                    <th>No data</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loading">
+            <mtl-d3-loader></mtl-d3-loader>
+          </div>
+        <div [id]="chartId" #topoforcedirected class="container container-heirarchy" [ngClass]="{
+            'forcecontainer--is-fullscreen': isfullscreen
+          }">
+            <div #legend class="forced-svg-legends"></div>
+            <!-- <ng-template #iconType let-viewName="name">
+                <mtl-icon [icon]="viewName" prefix="icon"></mtl-icon>
+            </ng-template> -->
+            <div class="toolbar--top-right" *ngIf="!loading"
+                [ngClass]="isfullscreen ? 'toolbar--top-expand-icon' : 'toolbar--top-collapse-icon'">
+                <button class="btn btn round mr-1 mb-1 mr-1 shadow-sm bg-white" (click)="fullscreen()"
+                    placement="bottom" *ngIf="isExpandable">
+                    <img [src]="sanitizeIcon(isfullscreen == false ? icons.maximize : icons.minimize)" alt="star"
+                        width="16" height="16">
+                </button>
+                <button class="btn btn round mr-1 mb-1 mr-1 shadow-sm bg-white" (click)="reload()">
+                    <img [src]="sanitizeIcon(icons.refresh)" alt="star" width="16" height="16">
+                </button>
+            </div>
+            <div class="toolbar--bottom" *ngIf="!loading">
+                <button class="btn btn round mr-1 mb-1 mr-1 shadow-sm bg-white" [ngClass]="{'z-index-1': isfullscreen}" (click)="zoomIn()"
+                    [disabled]="config.scaleExtent[1] == scale">
+                    <img [src]="sanitizeIcon(icons.zoomIn)" alt="star" width="16" height="16">
+                </button>
+                <!-- <button class="btn btn round mr-1 mb-1 mr-1 shadow-sm bg-white" (click)="resetZoom()">
+                    <img [src]="sanitizeIcon(icons.reset)" alt="star" width="16" height="16">
+                </button> -->
+                <button class="btn btn round mr-1 mb-1 mr-1 shadow-sm bg-white" [ngClass]="{'z-index-1': isfullscreen}" (click)="zoomOut()"
+                    [disabled]="config.scaleExtent[0] == scale">
+                    <img [src]="sanitizeIcon(icons.zoomOut)" alt="star" width="16" height="16">
+                </button>
+            </div>
+
+            <div class="minimap--bottom" #minimap>
+            </div>
+        </div>
+    </div>
+</div>

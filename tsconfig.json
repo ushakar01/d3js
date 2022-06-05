@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "target": "es6",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "paths": {
+      "sample-library": [
+        "dist/sample-library/sample-library",
+        "dist/sample-library"
+      ],
+      "@mtl/d3": [
+        "dist/mtl/d3/mtl-d3",
+        "dist/mtl/d3"
+      ]
+    },
+    "allowJs": true,
+  },
+  "angularCompilerOptions": {
+    "allowJs": true,
+    "skipLibCheck": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": false,
+    "preserveWhitespaces": true,
+    "enableIvy": false
+  }
+}

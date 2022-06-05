@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/mtl/d3",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "d3": "d3",
+      "d3-zoom": "d3-zoom",
+      "d3-selection": "d3-selection",
+      "d3-hierarchy": "d3-hierarchy",
+      "d3-transform": "d3-transform",
+      "@mtl/notifications": "@mtl/notifications",
+      "@mtl/icon": "@mtl/icon",
+      "@mtl/empty-state":"@mtl/empty-state",
+      "@ng-bootstrap/ng-bootstrap": "@ng-bootstrap/ng-bootstrap"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<div class="tree-filter-container">
+    <div _ngcontent-yhq-c341="" class="d-flex flex-row">
+        <a _ngcontent-yhq-c341="" class="circleBadge circlebadge--small" style="background-color: rgb(1, 43, 122);">
+            <!-- <mtl-icon _ngcontent-yhq-c341="" height="18" width="18"  style="color: white;" icon="filter"></mtl-icon> -->
+
+        </a>
+        <div _ngcontent-yhq-c341="" class="d-flex flex-column justify-content-center">
+            <div _ngcontent-yhq-c341="" class="ng-star-inserted">
+                <h5 _ngcontent-yhq-c341="" placement="bottom" class="titleControl ml-2" > Filters
+                </h5>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <select class="form-control-sm modal-input-box" data-placement="top" #myDrop data-title="Operator"
+            data-toggle="tooltip" data-trigger="hover"
+            [(ngModel)]="filtervalue" id="issueinput5" name="operator"
+            (change)="_filterApplied(myDrop.value)" style="width: 100%">
+            <option *ngFor="let item of allTypes" [value]="item?.name">
+               {{ item?.name }}
+            </option>
+        </select>
+    </div>
+    <ul ngbNav #nav="ngbNav" [destroyOnHide]="true" (navChange)="beforeChange($event)"
+        class="justify-content-start nav nav-tabs">
+        <li id="{{ i }}" [ngbNavItem]="i" *ngFor="let tab of status; let i = index">
+            <a ngbNavLink>
+                <b>{{ tab | titlecase }}</b>
+            </a>
+            <ng-template ngbNavContent>
+                <ng-container>
+                    <div class="d-flex flex-column">
+                        <div class="ml-auto">
+                            <mtl-d3-search (change)="_filterItems($event)">
+                      </mtl-d3-search>
+                        </div>
+                    </div>
+                    <span class="font-medium-1">Total: {{ (dropdownData | async)?.length }}</span>
+                    <div *ngIf="isDropdownDataLoading">Loading..</div>
+                    <ng-container *ngIf=" (dropdownData | async)?.length > 0; else elseTemplate">
+                        <div class="font-small-3 app-alert leftside-nav">
+                            <div class="each__node card card-body p-2 my-1" role="button" *ngFor="let item of dropdownData | async" (click)="selection(item)">
+                                <span ngbTooltip="{{ item?.name }}" placement="left" class="long-text-truncated" container="body">
+                                    <!-- <mtl-icon [icon]="item.type ? item.type : 'undefined'" [ngStyle]="{color:getHealth(item.health)}" style="width: 40px" *ngIf="item.type"></mtl-icon> -->
+                                    {{ item?.name | titlecase }}
+                                </span>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                    <!-- <mtl-empty-state ></mtl-empty-state> -->
+                    </ng-template>
+                </ng-container>
+            </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>

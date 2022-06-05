@@ -1,0 +1,60 @@
+:host {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .pr-1 {
+      padding: 5px 6px;
+    }
+  
+    i.control-icon {
+      &::before {
+        font-size: 2.4rem;
+      }
+  
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    input {
+      border: 0 !important;
+      outline: none;
+      font-size: 14px;
+      width: 10rem;
+      transition: width 0.2s ease;
+      background-color: transparent;
+      padding: 0;
+  
+      &:focus {
+        box-shadow: none !important;
+      }
+  
+      &.hidden {
+        width: 0;
+        margin: 0;
+      }
+    }
+    a {
+      background: #f2f3f8;
+      height: 24px;
+      width: 24px;
+      display: flex !important;
+      border-radius: 50%;
+      mtl-icon {
+        margin: auto;
+        margin-top: 0;
+      }
+    }
+  
+    .searchBorder {
+      border: 1px solid transparent;
+    }
+  
+    .searchActive {
+      background: #fff;
+      padding: 5px 6px;
+      padding-left: 18px;
+      border-radius: 30px;
+      border: 1px solid #acacac;
+    }
+  }
+  
